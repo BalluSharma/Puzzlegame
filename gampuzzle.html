@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+           .image{
+                    width: 100px;
+                    height: 100px;
+                     vertical-align: top;
+                }
+
+          table{
+            margin: 0px auto;
+          } 
+
+          h1{
+            text-align: center;
+          }
+
+          table, tr, td{
+            border: 1px solid black;
+            border-collapse: collapse;
+          }
+
+    </style>
+
+    <script>
+          var origionalImages = [
+                 "puzzle1/image_part_001.jpg",
+                 "puzzle1/image_part_002.jpg",
+                 "puzzle1/image_part_003.jpg",
+                 "puzzle1/image_part_004.jpg",
+                 "puzzle1/image_part_005.jpg",
+                 "puzzle1/image_part_006.jpg",
+                 "puzzle1/image_part_007.jpg",
+                 "puzzle1/image_part_008.jpg",
+                 "puzzle1/image_part_009.jpg",
+                 "puzzle1/image_part_010.jpg",
+                 "puzzle1/image_part_011.jpg",
+                 "puzzle1/image_part_012.jpg",
+                 "puzzle1/image_part_013.jpg",
+                 "puzzle1/image_part_014.jpg",
+                 "puzzle1/image_part_015.jpg",
+                 "puzzle1/image_part_016.jpg",
+          ];
+
+          var images = [
+          "puzzle1/image_part_006.jpg",
+          "puzzle1/image_part_001.jpg",
+          "puzzle1/image_part_002.jpg",
+          "puzzle1/image_part_003.jpg",
+          "puzzle1/image_part_004.jpg",
+         "puzzle1/image_part_013.jpg",
+          "puzzle1/image_part_007.jpg",
+          "puzzle1/image_part_014.jpg",
+          "puzzle1/image_part_008.jpg",
+          "puzzle1/image_part_009.jpg",
+          "puzzle1/image_part_010.jpg",
+          "puzzle1/image_part_011.jpg",
+          "puzzle1/image_part_012.jpg",
+            "puzzle1/image_part_016.jpg",
+          "puzzle1/image_part_015.jpg",
+          "puzzle1/image_part_005.jpg",
+   ];
+
+   function setImages() {
+         for(i=0;i<16;i++)
+         {
+            document.getElementsByClassName("image")[i].src = images[i]; 
+         }
+   }
+
+
+   var select1 = -1;
+   var select2 = -1;
+
+function moveimage(e,i)
+{
+    if(select1<0)
+    {
+        select1 = i;
+        e.style.outline = "5px solid yellow";
+    }   
+    else if(select2<0)
+{
+    select2 = i;
+    
+    var temp = images[select1];
+    images[select1] = images[select2];
+    images[select2] = temp;
+
+    setImages();
+
+    document.getElementsByClassName("image")[select1].style.outline = "none";
+    select1=-1;
+    select2 = -1;
+
+  checksolved();
+} 
+
+}
+
+function checksolved() {
+    var status = true;
+    for(var i = 0; i<16; i++){
+        if(images[i] == origionalImages[i])
+        {
+            status = true;
+        }
+        else{
+            status = false;
+            break;
+        }
+    }
+    if(status==true)
+    {
+        hint.innerHTML ="Puzzle solved successfully";
+    }
+}
+    </script>
+</head>
+<body onload="setImages()">
+    <h1>Puzzle Game</h1>
+<h1 id="hint"></h1>
+    <table cellspacing="0" cellpadding="0">
+        <tr>
+            <td><img class="image" onclick="moveimage(this,0)"/></td>
+            <td><img class="image" onclick="moveimage(this,1)"/></td>
+            <td><img class="image" onclick="moveimage(this,2)"/></td>
+            <td><img class="image" onclick="moveimage(this,3)"/></td>
+        </tr>
+
+        <tr>
+            <td><img class="image" onclick="moveimage(this,4)"/></td>
+            <td><img class="image" onclick="moveimage(this,5)"/></td>
+            <td><img class="image" onclick="moveimage(this,6)"/></td>
+            <td><img class="image" onclick="moveimage(this,7)"/></td>
+        </tr>
+
+        <tr>
+            <td><img class="image" onclick="moveimage(this,8)"/></td>
+            <td><img class="image" onclick="moveimage(this,9)"/></td>
+            <td><img class="image" onclick="moveimage(this,10)"/></td>
+            <td><img class="image" onclick="moveimage(this,11)"/></td>
+        </tr>
+
+        <tr>
+            <td><img class="image" onclick="moveimage(this,12)"/></td>
+            <td><img class="image" onclick="moveimage(this,13)"/></td>
+            <td><img class="image" onclick="moveimage(this,14)"/></td>
+            <td><img class="image" onclick="moveimage(this,15)"/></td>
+        </tr>
+
+    </table>
+</body>
+</html>
